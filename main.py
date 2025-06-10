@@ -10,9 +10,10 @@ def chatterbox_tts():
     # If you want to synthesize with a different voice, specify the audio prompt
     exaggeration=0.5
     cfg_weight=0.3
-    AUDIO_PROMPT_PATH="target.wav"  # Path to your audio prompt file
+    audio_prompt_path="target.wav"  # Path to your audio prompt file
+    model.prepare_conditionals(audio_prompt_path)
     start_time = time.time()
-    wav = model.generate(text, audio_prompt_path=AUDIO_PROMPT_PATH, exaggeration=exaggeration, cfg_weight=cfg_weight)
+    wav = model.generate(text, exaggeration=exaggeration, cfg_weight=cfg_weight)
     ta.save("test2.wav", wav, model.sr)
     print(f"Audio generation took {time.time() - start_time:.2f} seconds")
 
