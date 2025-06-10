@@ -1,5 +1,6 @@
 import torchaudio as ta
 from chatterbox.tts import ChatterboxTTS
+import time
 def chatterbox_tts():
     print("Welcome to the Chatterbox TTS system!")
     model = ChatterboxTTS.from_pretrained(device="cuda")
@@ -7,9 +8,12 @@ def chatterbox_tts():
     # wav = model.generate(text)
     # ta.save("test-1.wav", wav, model.sr)
     # If you want to synthesize with a different voice, specify the audio prompt
+
     AUDIO_PROMPT_PATH="target.wav"  # Path to your audio prompt file
+    start_time = time.time()
     wav = model.generate(text, audio_prompt_path=AUDIO_PROMPT_PATH)
     ta.save("test2.wav", wav, model.sr)
+    print(f"Audio generation took {time.time() - start_time:.2f} seconds")
 
 def main():
     print("Hello from tts-playground!")
